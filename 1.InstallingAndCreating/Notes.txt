@@ -1,0 +1,255 @@
+npx create-react-app app_name
+        * name can no longer contain capital letters
+
+cd app_name
+npm start
+
+### 1. Components
+
+**Concept:**
+
+- **Functional Components:** These are simple JavaScript functions that return JSX (JavaScript XML).
+- **Class Components:** These are ES6 classes that extend `React.Component` and can have state and lifecycle methods.
+
+**Example:**
+
+**Functional Component:**
+
+```jsx
+function Greeting() {
+  return <h1>Hello, World!</h1>;
+}
+```
+
+**Class Component:**
+
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+```
+
+### 2. JSX
+
+**Concept:**
+
+- JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files.
+
+**Example:**
+
+```jsx
+const element = <h1>Welcome to React!</h1>;
+```
+
+### 3. Props
+
+**Concept:**
+
+- Props (short for "properties") are used to pass data from parent components to child components.
+
+**Example:**
+
+```jsx
+function Welcome(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+
+// Usage
+<Welcome name="Alice" />
+```
+
+### 4. State
+
+**Concept:**
+
+- State is a built-in object that stores property values that belong to a component. State allows components to create dynamic and interactive UIs.
+
+**Example:**
+
+**Using State in a Class Component:**
+
+```jsx
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+```
+
+**Using State in a Functional Component (React Hooks):**
+
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### 5. Lifecycle Methods
+
+**Concept:**
+
+- Lifecycle methods are hooks that allow you to run code at specific points in a component’s life in a class component.
+
+**Example:**
+
+```jsx
+class Example extends React.Component {
+  componentDidMount() {
+    console.log('Component mounted');
+  }
+
+  componentDidUpdate() {
+    console.log('Component updated');
+  }
+
+  componentWillUnmount() {
+    console.log('Component will unmount');
+  }
+
+  render() {
+    return <div>Check the console for lifecycle messages.</div>;
+  }
+}
+```
+
+### 6. Event Handling
+
+**Concept:**
+
+- React uses camelCase syntax for event handlers and passes events as functions rather than strings.
+
+**Example:**
+
+```jsx
+function Button() {
+  const handleClick = () => {
+    alert('Button clicked!');
+  };
+
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
+
+### 7. Conditional Rendering
+
+**Concept:**
+
+- Conditional rendering in React works the same way conditions work in JavaScript.
+
+**Example:**
+
+```jsx
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  return isLoggedIn ? <h1>Welcome back!</h1> : <h1>Please sign up.</h1>;
+}
+```
+
+### 8. Lists and Keys
+
+**Concept:**
+
+- Use the `map()` function to iterate over an array and return a list of elements. Keys help React identify which items have changed.
+
+**Example:**
+
+```jsx
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>{number}</li>
+  );
+
+  return <ul>{listItems}</ul>;
+}
+
+// Usage
+<NumberList numbers={[1, 2, 3, 4, 5]} />
+```
+
+### 9. Forms
+
+**Concept:**
+
+- Forms in React are controlled components, meaning React handles the form data through state.
+
+**Example:**
+
+```jsx
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+  }
+
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
+  };
+
+  handleSubmit = (event) => {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    );
+  }
+}
+```
+
+### 10. React Router
+
+**Concept:**
+
+- React Router is a library for routing in React applications. It allows navigation between different components, changing the browser URL, and keeping UI in sync with the URL.
+
+**Example:**
+
+```jsx
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+      </Switch>
+    </Router>
+  );
+}
+```

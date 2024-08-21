@@ -1,0 +1,18 @@
+Topics used - https://react.dev/learn#
+
+JSX (JavaScript XML(Extensible Markup Language))
+Components
+    Consistency: React components must return a single element.
+    Structure: A single parent element helps organize and group child elements.
+    Flexibility: Using div, section, or React.Fragment allows for easier styling and layout control.
+CSS (Cascading Style Sheets)
+Props
+    For Example:   ./components/TodoItem.jsx - {props.completed ? <></> : <input type='checkbox' />}
+                                ./App.js - <TodoItem completed='true' text='Code' />
+Hooks
+    LifeCycle of a Component
+        Constructed -> Mounted -> Updated -> Unmounted
+    useState Hook
+        Whenever the value of the state changes, the component re-renders itself with updated value(means every use of function to set the value will re-render the whole component again and again)
+    useEffect Hook
+        Run code during the change in lifecycle of a component

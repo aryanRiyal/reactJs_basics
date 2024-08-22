@@ -11,7 +11,7 @@ Props
                                 ./App.js - <TodoItem completed='true' text='Code' />
 Hooks
     LifeCycle of a Component
-        Constructed -> Mounted -> Updated -> Unmounted
+        Constructed -> Mounted -> Updated -> Unmounted then repeat from the start
     useState Hook
         Whenever the value of the state changes, the component re-renders itself with updated value(means every use of function to set the value will re-render the whole component again and again)
     useEffect Hook

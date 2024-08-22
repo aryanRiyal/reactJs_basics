@@ -1,0 +1,4 @@
+Board - uses useState and extra ternary statements to provide features like try again if it's a draw
+
+newBoard - uses useState and useEffect for these same effects
+I was trying to use the map function for squares with the help of chatgpt but was unable to implement it because it interferes with the css and is difficult to make it look like a tic-tac-toe grid

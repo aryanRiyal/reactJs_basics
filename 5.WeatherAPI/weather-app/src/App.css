@@ -1,0 +1,28 @@
+.App {
+    text-align: center;
+}
+
+.card {
+    padding: 12px;
+    width: 40%;
+    margin: auto;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.input-field {
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 12px;
+    font-size: 25px;
+    padding: 5px;
+    margin: 20px 4px;
+}
+
+.btn {
+    border: 0px;
+    border-radius: 12px;
+    margin: 20px 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}

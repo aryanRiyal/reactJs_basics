@@ -1,0 +1,14 @@
+npm install react-router-dom
+
+import { BrowserRouter, Routes, Route, useParams, NavLink } from 'react-router-dom';
+
+<BrowserRouter>
+    <Routes>
+        <Route path='/Normal' element={<Route />} />
+        <Route path='Dynamic/:Routes' element={<we use a hook named useParams to extract the value of :Routes />} />
+        <Route path='nested'>
+            <Route path='routes' element={<Nested Routes />}
+        </Route>
+        <Route path='*' element={<Default or Error Route />} />
+    </Routes>
+</BrowserRouter>

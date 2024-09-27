@@ -1,0 +1,39 @@
+api = https://api.imgflip.com/get_memes
+
+react
+onClick()
+onChange={(e) => setValue(e.target.value)}
+onDoubleClick()
+
+
+react-bootstrap
+className = 'container', 'row'
+components = Cards
+
+
+react-router-dom
+const navigate = useNavigate();
+<Button onClick={() => navigate(`/edit?url=${props.img}`)} variant='primary'>Edit</Button>
+<Button variant='success'></Button>
+
+url is looking something like this = 'http://localhost:3000/edit?url=https://i.imgflip.com/30b1gx.jpg'
+
+const [params] = useSearchParams();
+<img src={params.get('url')} />
+
+
+react-draggable
+import Draggable from 'react-draggable'
+<Draggable>
+    <h1>You Can drag this text! </h1>
+</Draggable>
+
+
+at ./pages/Edit.jsx
+import { exportComponentAsJPEG } from 'react-component-export-image';
+import {createRef} from 'react';
+const memeRef = createRef();
+<div>
+    <div ref={memeRef} className='meme'></div>
+    <Button variant='success' onClick={(e) => exportComponentAsJPEG(memeRef) }></div>
+</div>

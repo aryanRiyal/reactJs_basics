@@ -1,0 +1,67 @@
+Difference between npm and npx, and why we use npx to create and build apps instead of npm?
+    npm (Node Package Manager): A default package manager for Node.js that installs and manages packages globally or locally within your project.
+    
+    npx: A tool included with npm that executes packages without installing them globally. It's particularly useful for trying out packages temporarily or running scripts from npm packages.
+
+    Why we use npx?
+        Temporary Package Execution: npx allows you to use a package without installing it globally, avoiding cluttering your system.
+    
+        Script Execution: You can run scripts from npm packages directly using npx, simplifying the development process.
+    
+        Create-React-App Integration: npx is often used to create and run React applications using create-react-app, providing a convenient way to start projects.
+
+
+Vite vs create-react-app
+    Development Server: vite offers a significantly faster development experience compared to create-react-app due to its No-Bundle Development mode.
+    
+    Build Optimization: vite produces smaller and more optimized production builds compared to create-react-app.
+    
+    Modern Features: vite supports modern JavaScript features and syntax, allowing you to write more concise and efficient code.
+    
+    Flexibility: vite provides more flexibility and control over the build process, enabling customization to suit your project's specific needs.
+
+
+What are the different scripts available in package.json, when we create an app(like the difference between start, build, test, eject) and explain the other components in the package.json(eslintConfig, browserslist)?
+    start: Typically used to start the development server, allowing you to view and interact with your application in real-time.
+    
+    build: Creates a production-ready version of your application, optimized for deployment.
+    
+    test: Runs unit tests to ensure the correctness of your code.
+    
+    eject: In create-react-app, this script allows you to customize the configuration files manually.
+    
+    Other Components in package.json
+        eslintConfig: Specifies the configuration for ESLint, a linter that helps you maintain code quality and consistency.
+        
+        browserslist: Defines the target browsers for your application, allowing you to use features and syntax that are compatible with your desired audience.
+        
+        dependencies: Lists the dependencies required by your project, which are installed automatically when you run npm install.
+        
+        devDependencies: Lists the dependencies used during development but not required in production, such as testing frameworks or build tools.
+        
+        scripts: Contains a list of custom scripts that you can define and run using npm run <script-name>.
+
+
+//  npx build
+npx create-react-app app_name
+        * name can no longer contain capital letters
+
+cd app_name
+
+npm run start
+Or
+npm start
+
+If the node_modules folder is missing, use
+npm install
+
+
+//  Vite build
+Now how to create an app using vite 
+
+npm create vite@latest
+cd app_name
+npm install
+npm run dev
+Or
+we can view package.json to check what scripts to run

@@ -1,0 +1,305 @@
+Basics of React
+
+<--------  -------->
+
+//	Components
+Functional Components: Simple JavaScript functions returning JSX (JavaScript XML) to define UI elements.
+Class Components (ES6): Extend React.Component, allowing state and lifecycle methods for dynamic behavior.
+/*
+Example:	JavaScript
+// Functional Component
+function Greeting() {
+  return <h1>Hello, World!</h1>;
+}
+
+// Class Component
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+*/
+
+<--------  -------->
+
+//	JSX
+Syntax extension for JavaScript, letting you write HTML-like code within JavaScript files.
+/*
+Example:	JavaScript
+const element = <h1>Welcome to React!</h1>;
+*/
+
+<--------  -------->
+
+//	Props
+Short for "properties," used to pass data from parent components to child components.
+/*
+Example:	JavaScript
+function Welcome(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+	//	Usage
+	<Welcome name="Alice" />
+*/
+
+<--------  -------->
+
+//	State
+Stores property values within components, enabling dynamic and interactive UI updates.
+/*
+Class Components (State):
+Example:	JavaScript
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+  increment = () => {
+    this.setState({ count: this.state.count   
+ + 1 });
+  };
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+*/
+
+/*
+Functional Components (Hooks with useState):   
+Example:	JavaScript
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>   
+    </div>   
+  );
+}
+*/
+
+<--------  -------->
+
+//	Lifecycle Methods (Class Components)
+Hooks that run code at specific points in a component's lifecycle:
+componentDidMount: Runs after component mounts (inserts into DOM).
+componentDidUpdate: Runs after updates to state or props.
+componentWillUnmount: Runs before component is removed from DOM.
+/*
+Example:	JavaScript
+class Example extends React.Component {
+  componentDidMount() {
+    console.log('Component mounted');
+  }
+  componentDidUpdate() {
+    console.log('Component updated');
+  }
+  componentWillUnmount() {
+    console.log('Component will unmount');
+  }
+  render() {
+    return <div>Check   
+ the console for lifecycle messages.</div>;
+  }
+}
+*/
+
+<--------  -------->
+
+//	Event Handling
+Uses camelCase syntax for event handlers (onClick, onSubmit, etc.) and passes them as functions.
+/*
+Example:	JavaScript
+function Button() {
+  const handleClick = () => {
+    alert('Button clicked!');
+  };
+  return <button onClick={handleClick}>Click Me</button>;
+}
+*/
+
+<--------  -------->
+
+//	Conditional Rendering
+Uses JavaScript conditions to control which components are rendered.
+/*
+Example:	JavaScript
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  return isLoggedIn ? <h1>Welcome back!</h1> : <h1>Please sign up.</h1>;
+}
+*/
+
+<--------  -------->
+
+//	Lists and Keys
+map() function iterates over arrays and returns lists of elements. Keys help React identify which items have changed.
+/*
+Example:	JavaScript
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>{number}</li>
+  );
+  return <ul>{listItems}</ul>;   
+}
+	//	Usage
+	<NumberList numbers={[1, 2, 3, 4, 5]} />
+*/
+
+<--------  -------->
+
+//	Forms
+Controlled components - React manages form data through state.
+/*
+Example:	JavaScript
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+  }
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
+  };
+  handleSubmit = (event)   
+ => {   }
+}
+ */
+ 
+<--------  -------->
+
+//	Fragments
+Used to group elements without introducing an extra DOM node.
+Represented by <React.Fragment> or the shorthand <></>.
+/*
+Example:	JavaScript
+function Example() {
+  return (
+    <React.Fragment>
+      <h1>Title</h1>
+      <p>Paragraph</p>
+    </React.Fragment>
+  );
+}
+*/
+
+<--------  -------->
+
+//	Portals
+Render child components into a different DOM node, useful for modals or tooltips.
+Uses ReactDOM.createPortal.
+/*
+Example:	JavaScript
+import ReactDOM from 'react-dom';
+
+function Modal() {
+  return ReactDOM.createPortal(
+    <div className="modal">
+      <h1>Modal Content</h1>
+    </div>,
+    document.getElementById('modal-root')
+  );
+}
+*/
+
+<--------  -------->
+
+//	Custom Hooks
+Reusable functions that encapsulate state and logic within functional components.
+Use useState, useEffect, and other built-in hooks.
+/*
+Example:	JavaScript
+import { useState, useEffect } from 'react';
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);   
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const   
+ data = await response.json();
+        setData(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [url]);
+  return { data, loading, error };
+}
+*/
+
+<--------  -------->
+
+//	Context API
+Provides a way to share data between components without passing props down through the component tree.
+Involves creating a context object and a provider component.
+/*
+Example:	JavaScript
+import React, { createContext, useContext } from 'react';
+
+const ThemeContext = createContext('light');
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function   
+ MyComponent() {
+  const { theme } = useContext(ThemeContext);
+  return <div style={{ backgroundColor: theme === 'light' ? 'white' : 'black' }}>
+    {theme}
+  </div>;
+}
+*/
+
+<--------  -------->
+
+//	Higher-Order Components (HOCs)
+Functions that take a component as input and return a new component with enhanced functionality.
+Common use cases include:
+Adding features like logging, authentication, or error handling.
+Creating reusable components.
+/*
+Example:	JavaScript
+function withLogging(WrappedComponent) {
+  return class extends React.Component {
+    render() {
+      console.log('Component rendered:', WrappedComponent.name);
+      return <WrappedComponent {...this.props} />;
+    }
+  };
+}
+*/
+
+<--------  -------->
+
+//	Ref Forwarding
+Used to pass refs to child components without breaking their lifecycle methods.
+Involves using React.forwardRef.
+/*
+Example:	JavaScript
+const CustomInput = React.forwardRef((props, ref) => {
+  return <input {...props} ref={ref} />;
+});
+*/
+
+<--------  -------->

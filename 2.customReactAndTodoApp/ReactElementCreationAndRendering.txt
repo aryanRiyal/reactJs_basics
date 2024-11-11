@@ -1,0 +1,69 @@
+Understanding React Element Creation and Rendering
+
+1. Introduction to React Element Creation and Rendering
+   - In React, elements are the smallest building blocks for creating UI. They represent what gets displayed on the screen, like `<div>`, `<span>`, or any custom component.
+   - React uses `createElement` to generate these elements in a format it can understand, enabling it to manage rendering and updates efficiently.
+
+2. Experimenting with React.createElement
+   - `React.createElement` is the standard React method for creating elements programmatically. It returns a plain JavaScript object that represents the desired DOM node or component.
+   - When using `React.createElement`, we define:
+      - The type of element (e.g., `div`, `h1`, custom component).
+      - The attributes or props for the element.
+      - Any children elements or text to be rendered inside it.
+
+3. Custom Implementation in customReact.js
+   - We experimented by creating our own version of React’s element creation and rendering process to understand the internals better.
+   
+   - Creating a Custom React Element
+     - In `customReact/customreact.js`, we manually created a custom React element.
+     - We used a container to store this element, selected by using `document.querySelector()` targeting an element with the `id="root"`.
+
+   - Implementing a Custom Render Method
+     - We defined a custom `render` method in `customReact.js`.
+     - This method takes a React-like element (a JavaScript object representing the element) and injects it into the container (target DOM node with id `root`).
+     - It mirrors React’s rendering behavior by manipulating the DOM directly, showing how React could theoretically handle rendering without the full virtual DOM system.
+   
+4. Using the React Library’s render Method
+   - After creating our own render method, we moved on to using React’s built-in `render` method (from the `react-dom` package).
+   
+   - Example with the App Component
+     - We created an `App` component to explore how `render` works with a typical component setup.
+     - This demonstrated React’s ability to re-render the DOM efficiently by tracking changes and updating only what’s necessary.
+
+   - Creating an Element with React.createElement
+     - To explore how React builds element trees, we created an element using `React.createElement`.
+     - This time, because we’re working within React’s ecosystem, `React.createElement` returns an element that React can track and manage in the virtual DOM.
+     - This helped us understand the process from the perspective of React’s own render method.
+
+5. Introduction to Babel as a Transpiler
+   - In a typical React setup, JSX is used to simplify creating elements. However, JSX isn’t directly understood by browsers, so we use a transpiler like Babel.
+   - Babel takes JSX code and transpiles it into JavaScript, where each JSX element is converted to `React.createElement`.
+   - Example:
+      ```
+      const element = <h1>Hello, world!</h1>;
+      ```
+      Transpiles to:
+      ```
+      const element = React.createElement("h1", null, "Hello, world!");
+      ```
+   - Babel’s role ensures JSX can be seamlessly converted to JavaScript, enabling a more readable syntax while maintaining compatibility with `React.createElement`.
+
+6. Evaluated Expressions and Variable Injection
+   - React allows embedding variables and expressions inside elements.
+   - In JSX, `{variableName}` syntax lets us inject the value of a variable directly into the component’s rendering.
+   - Example:
+      ```
+      const name = "Alice";
+      const element = <h1>Hello, {name}!</h1>;
+      ```
+   - The `{name}` part is evaluated at runtime, and React injects the value of `name` into the rendered output.
+
+Summary: React Element Tree and HTML Rendering Process
+
+- React’s Rendering Approach
+  - React creates a virtual DOM to keep track of changes in the UI.
+  - Each time an update occurs, React compares the new virtual DOM with the previous one, determines what changed, and efficiently updates the real DOM (HTML).
+
+- Custom vs. React’s Render Process
+  - Our custom render function directly manipulated the DOM, giving insight into what React does behind the scenes.
+  - Using `React.createElement` and `ReactDOM.render` shows how React manages the element tree and virtual DOM to enable fast updates and re-rendering. 

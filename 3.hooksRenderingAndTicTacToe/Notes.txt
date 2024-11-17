@@ -1,0 +1,10 @@
+//Why hooks are important?
+//In the counterVite the variables are working fine when we are using let counter but the main problem is in updating the UI, addValue and removeValue both are successful in updating the variable but the actual value shown on the browser is not updating. 
+So we use React with the help of state it easily checks and updates the UI throughout the page.
+
+
+//TicTacToe
+Board - uses useState and extra ternary statements to provide features like try again if it's a draw
+
+newBoard - uses useState and useEffect for these same effects
+I was trying to use the map function for squares with the help of chatgpt but was unable to implement it because it interferes with the css and is difficult to make it look like a tic-tac-toe grid

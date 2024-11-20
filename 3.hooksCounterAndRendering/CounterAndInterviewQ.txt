@@ -1,0 +1,84 @@
+//Why hooks are important?
+//In the counterVite the variables are working fine when we are using let counter but the main problem is in updating the UI, addValue and removeValue both are successful in updating the variable but the actual value shown on the browser is not updating. 
+So we use React with the help of state it easily checks and updates the UI throughout the page.
+
+Explanation of `useState` Behavior with Multiple Updates
+
+When calling `setCounter` multiple times within the same render cycle, React batches these updates for performance reasons. This means that the updates are processed based on the current state value at the time the render cycle starts, not sequentially as they appear in the code.
+
+---
+
+What Happens with Repeated `setCounter` Calls?
+
+``javascript
+setCounter(counter + 1);
+setCounter(counter + 1);
+setCounter(counter + 1);
+setCounter(counter + 1);
+``
+
+1. Single Render Cycle:
+   - React groups these updates into a single render cycle.
+   - Since all calls use the same `counter` value from the current state, React sees them as:
+     ``javascript
+     setCounter(counter + 1); // Updates to counter + 1
+     setCounter(counter + 1); // Updates to counter + 1 again (same base value)
+     ...
+     ``
+   - The result is only `counter + 1` after all updates, because they each work on the same base value.
+
+2. Why Does This Happen?
+   - React's state updates are asynchronous, and it doesn't immediately update the state value between calls to `setCounter` within the same render cycle.
+   - React batches updates for performance, applying them only once the event handler or function has finished executing.
+
+---
+
+How to Update State Reliably with Multiple Increments
+
+To ensure the counter increments correctly (e.g., by 4), you can use the functional updater syntax provided by React:
+
+``javascript
+setCounter((prevCounter) => prevCounter + 1);
+setCounter((prevCounter) => prevCounter + 1);
+setCounter((prevCounter) => prevCounter + 1);
+setCounter((prevCounter) => prevCounter + 1);
+``
+
+1. Why Does This Work?
+   - The functional updater syntax passes the most recent state value (`prevCounter`) to the callback function.
+   - React ensures that `prevCounter` reflects the latest updated value, even if the state hasn't visibly changed yet.
+
+2. How It Propagates:
+   - Each `setCounter` call is queued separately, and React processes them in order.
+   - This approach avoids the batching problem, as each update operates on the updated state from the previous call.
+
+3. Result:
+   - The `counter` will correctly increment by 4.
+
+---
+
+Key Insights
+
+1. React State Propagation:
+   - React batches state updates within the same render cycle for performance.
+   - Multiple `setState` calls with the same logic will use the same "snapshot" of the state value unless a functional updater is used.
+
+2. When to Use Functional Updaters:
+   - Use the functional updater syntax when the new state depends on the previous state.
+   - This ensures that every update operates on the latest available state value.
+
+3. Example of Correct Behavior:
+   ``javascript
+   const [counter, setCounter] = useState(0);
+
+   const incrementCounter = () => {
+       setCounter((prevCounter) => prevCounter + 1);
+       setCounter((prevCounter) => prevCounter + 1);
+       setCounter((prevCounter) => prevCounter + 1);
+       setCounter((prevCounter) => prevCounter + 1);
+   };
+
+   // Result: counter increments by 4 after this function.
+   ``
+
+By using the callback pattern (`(prevCounter) => prevCounter + 1`), React will propagate the state updates sequentially, ensuring the desired behavior.

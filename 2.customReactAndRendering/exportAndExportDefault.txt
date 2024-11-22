@@ -1,0 +1,76 @@
+Difference Between `export` and `export default`:
+
+1. Purpose:
+   - `export`: For named exports, allows exporting multiple values.
+   - `export default`: For a single main value per module.
+
+<---- ---->
+
+2. Syntax:
+   - Named Export: 
+     ``javascript
+     export const add = (a, b) => a + b;
+	 export const subtract = (a, b) => a - b;
+	 export class Calculator {
+    	 multiply(a, b) {
+         	 return a * b;
+     	 }
+	 }
+     ``
+
+   - Default Export:
+     ``javascript
+     export default function multiply(a, b) {
+         return a * b;
+     }
+     ``
+
+<---- ---->
+
+3. Importing:
+   - Named Export:
+     ``javascript
+     // main.js
+	 import { add, subtract } from './module.js';
+	 console.log(add(2, 3)); // 5
+
+	 // Importing all exports
+	 import * as math from './module.js';
+	 console.log(math.subtract(5, 3)); // 2
+	 console.log(math.Calculator); // Class reference
+     ``
+
+   - Default Export:
+     ``javascript
+     // main.js
+     import multiplyFunction from './module.js'; // Name can be anything
+     console.log(multiplyFunction(4, 5)); // 20
+     ``
+
+<---- ---->
+
+4. Number of Exports:
+   - `export`: Allows multiple exports from a single file.
+   - `export default`: Only one default export per module.
+
+<---- ---->
+
+5. Use Case:
+   - Use `export` for utility modules with multiple functions/values.
+   - Use `export default` for modules focusing on a single component or function.
+
+<---- ---->
+
+6. Example of Both Combined:
+   ``javascript
+   // module.js
+   export const divide = (a, b) => a / b;
+   export default function multiply(a, b) {
+       return a * b;
+   }
+
+   // main.js
+   import multiply, { divide } from './module.js';
+   console.log(multiply(4, 5)); // 20
+   console.log(divide(10, 2)); // 5
+   ``

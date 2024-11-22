@@ -1,0 +1,94 @@
+Hooks - useState, useCallback, useEffect, useRef, useId - Introduction and Basics
+
+<----   ---->
+
+useRef vs. useState: A Comparative Analysis
+
+useState
+Purpose: Manages state values that can change over time and trigger re-renders.
+How it works:
+	-Accepts an initial value as an argument.
+Returns an array with two elements:
+	-The current state value.
+	-A function to update the state value.
+When to use:
+	-When you need to store and update values that trigger re-renders.
+	-For tracking user input, form data, or any dynamic data that needs to be displayed or used within the component.
+
+
+useRef
+Purpose: Creates a reference to a DOM element or any other mutable value that persists across renders.
+How it works:
+	-Accepts an initial value as an argument.
+Returns a mutable reference object.
+When to use:
+	-To access DOM elements directly, for example, to focus on an input field or to trigger a scroll event.
+	-To store values that don't need to trigger re-renders, such as previous props or state values.
+
+In summary:
+useState is ideal for managing state values that directly affect the component's rendering.
+useRef is useful for creating persistent references to DOM elements or other mutable values that don't necessarily trigger re-renders.
+
+
+<----   ---->
+
+
+Difference Between useCallback and useEffect
+Purpose:
+useCallback: Memoizes a function to avoid unnecessary re-creation during renders. Useful for optimizing performance when functions are passed as props or used in dependency arrays.
+
+useEffect: Used for side effects like fetching data or updating the DOM. Executes when dependencies change.
+
+
+Usage in Password Generator Example:
+useCallback:
+	-Memoizes passwordGenerator so it only updates when length, numberAllowed, or charAllowed change.
+	-Prevents unnecessary re-creation of the function on every render.
+
+useEffect:
+	-Calls passwordGenerator when its dependencies (length, numberAllowed, or charAllowed) change, ensuring the password is updated dynamically.
+
+
+Dependencies:
+useCallback:
+	-Tracks dependencies of the memoized function.
+	-Re-creates the function only when its dependencies change.
+useEffect:
+	-Tracks dependencies to control when the effect runs.
+	-Executes only when one of its dependencies changes.
+
+Without Dependencies:
+useCallback: Without dependencies, it always returns the same function, which may not reflect updated state.
+
+useEffect: Without dependencies, it runs after every render, causing redundant or infinite executions.
+
+
+Why setPassword Is Used in useCallback Instead of password:
+	-Stable Function: setPassword is stable and doesn’t change between renders, while password is a state variable that changes with updates.
+	-Avoid Unnecessary Updates: Including password in the dependencies of useCallback would cause passwordGenerator to re-create every time the password changes.
+	-Works Without Dependencies: setPassword can safely be used without being included in the dependency array since it’s stable.
+
+Why setPassword Is Not in useEffect:
+	-No Need to Track: The passwordGenerator function already uses setPassword, so including setPassword in useEffect would add no value.
+	-Avoid Redundancy: Including setPassword in the dependencies would clutter the array without providing any functional benefit.
+
+
+Key Takeaways:
+useCallback: Memoizes the passwordGenerator function to prevent re-creation unless dependencies change.
+
+useEffect: Ensures passwordGenerator is executed when dependencies change.
+
+Dependencies: Ensure correct behavior and performance optimization while avoiding redundant or infinite updates.
+
+setPassword: Used in useCallback because it’s stable. Not included in useEffect dependencies because it doesn’t change and is already handled.
+
+
+<----   ---->
+
+
+useId() - is a React Hook for generating unique IDs that can be passed to accessibility attributes.
+
+Do not call useId to generate keys in a list. Keys should be generated from your data.
+
+
+<----   ---->

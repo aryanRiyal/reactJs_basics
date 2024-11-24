@@ -1,0 +1,24 @@
+onClick()
+Explanation of onClick and Function References vs. Function Calls
+
+What onClick Expects:
+    -The onClick attribute expects a function reference, not the result of a function execution.
+    -A function reference is simply the name of a function, such as setColor, without calling it (i.e., no parentheses ()).
+    -When a function reference is provided, React executes the function only when the click event occurs.
+
+
+Issue with onClick(setColor('Red')):
+    -When you write onClick(setColor('Red')), the function setColor('Red') is executed immediately as the code runs.
+    -The result of this execution is passed to onClick. Since setColor doesn't return a function, this results in a syntax or runtime error because onClick expects a callable function.
+Example:	jsx
+// Executes immediately when the component renders
+onClick(setColor('Red'));
+
+
+Correct Usage with a Callback:
+    -To pass a value to setColor upon a click event, you need to wrap the function call in another function (a callback). This ensures that setColor('Red') is not executed immediately but only when the click event occurs.
+Example:	jsx
+// Wrapping setColor('Red') in a callback
+onClick(() => setColor('Red'));
+
+Here, the arrow function () => setColor('Red') is the function reference passed to onClick. When the button is clicked, the arrow function is executed, and it in turn calls setColor('Red').
